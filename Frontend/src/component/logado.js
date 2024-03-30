@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Clientes from './dataCliente';
 import Servicos from './dataServico';
-import './login.css';
+import './logado.css';
 
 export default class Logado extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: null,
+      activeTab: 'clientes',
       clientesData: [],
       servicosData: [],
     };
@@ -28,6 +28,7 @@ export default class Logado extends Component {
         console.error('Erro ao obter os dados de Clientes:', error);
       });
   };
+
   fetchServicosData = () => {
     axios
       .get('http://localhost:3007/api/v1/servicos/')
@@ -54,37 +55,43 @@ export default class Logado extends Component {
 
     if (token !== null) {
       return (
-        <div>
+        <div className="container">
+          <div className="header">
+            <h1>Bem-vindo ao Sistema de Reservas</h1>
+            <button className="btn-logout" onClick={this.handleLogout}>
+              Sair
+            </button>
+          </div>
           <div className="menu">
-            <ul>
+            <ul className="tab-list">
               <li>
-                <a href="#" onClick={this.fetchClientesData}>
-                  Serviços agendados
-                </a>
+                <button className="btn-logout">
+                  <a href='/cadastro'>
+                    Criar Conta
+                  </a>
+                </button>
               </li>
               <li>
-                <a href="#" onClick={this.fetchServicosData}>
-                  Serviços cadastrados
-                </a>
+                <button className="btn-logout">
+                  <a href='/formServico'>
+                    Cadastrar Serviços
+                  </a>
+                </button>
+
               </li>
-              <li>
-                <a href='/formServico'>
-                  Cadastrar Serviços
-                </a>
+              <li className={activeTab === 'clientes' ? 'active' : ''}>
+                <button onClick={this.fetchClientesData}>
+                  Serviços Agendados
+                </button>
               </li>
-              <li>
-                <a href='/cadastro'>
-                  Criar Conta
-                </a>
-              </li>
-              <li>
-                <button className="btn btn-primary mb-2" onClick={this.handleLogout}>
-                  Sair
+              <li className={activeTab === 'servicos' ? 'active' : ''}>
+                <button onClick={this.fetchServicosData}>
+                  Serviços Cadastrados
                 </button>
               </li>
             </ul>
           </div>
-          <div className="text-center">
+          <div className="content">
             {activeTab === 'clientes' && (
               <Clientes data={clientesData} />
             )}

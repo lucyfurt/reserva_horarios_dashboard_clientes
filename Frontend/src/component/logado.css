@@ -1,0 +1,75 @@
+/* logado.css */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+  }
+
+  .header h1 {
+    text-align: center;
+  }
+  
+  .menu {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .tab-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .tab-list li {
+    margin-right: 10px;
+  }
+  
+  .tab-list li button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .tab-list li button:hover {
+    border-bottom-color: #007bff;
+  }
+  
+  .tab-list li.active button {
+    border-bottom-color: #007bff;
+  }
+  
+  .btn-logout {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-logout:hover {
+    background-color: #c82333;
+  }
+  
+  .content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
