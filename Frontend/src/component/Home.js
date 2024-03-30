@@ -20,9 +20,8 @@ class App extends Component {
                         <h1 className="main-heading">Reservar serviços</h1>
                         <div className="button-container">
                             <a className="custom-button" href='/formCliente'>
-                                Reservar Horário e Serviço
-                            </a>
-                           
+                                Agendar serviço
+                            </a>                            
                         </div>
                     </div>
                 </div>

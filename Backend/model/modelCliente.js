@@ -15,6 +15,7 @@ const clienteSchema = new Schema({
     type: String,
     required: true
   },
+  diasDisponiveis: [{ type: Date }],
   servico_id: {
     type: Schema.Types.ObjectId,
     ref: 'Servico' 
