@@ -14,6 +14,8 @@ const FormCliente = () => {
   });
   const [servicos, setServicos] = useState([]); // Lista de serviços disponíveis
   const [submissionMessage, setSubmissionMessage] = useState('');
+  const [servicoSelecionado, setServicoSelecionado] = useState(null); // Estado para armazenar o serviço selecionado
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // Carregar lista de serviços disponíveis ao montar o componente
@@ -34,18 +36,45 @@ const FormCliente = () => {
       ...prevData,
       [name]: value
     }));
+
+    setError(''); // Limpar mensagem de erro ao modificar o formulário
+  };
+
+  const handleChangeServico = (e) => {
+    const servicoId = e.target.value;
+    const servico = servicos.find((s) => s._id === servicoId);
+    setServicoSelecionado(servico);
+    handleChange(e); // Atualizar o estado do formulário também
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      if (!servicoSelecionado || !servicoSelecionado.disponivel) {
+        setError('O serviço selecionado não está disponível.');
+        return;
+      }
+
       const response = await axios.post('http://localhost:3007/api/v1/clientes/', formData);
       setSubmissionMessage('Formulário enviado com sucesso!');
       console.log(response.data);
+
+      // Marcar o serviço como indisponível após cadastrar o cliente
+      const updatedServico = { ...servicoSelecionado, disponivel: false };
+      await axios.put(`http://localhost:3007/api/v1/servicos/${servicoSelecionado._id}`, updatedServico);
+      console.log('Serviço marcado como indisponível.');
     } catch (error) {
-      setSubmissionMessage('Erro ao submeter o formulário. Por favor, Tente novamente mais tarde!');
-      console.error('Error submitting form:', error);
+      if (error.response) {
+        console.error('Error response:', error.response.data); // Aqui você acessa a mensagem de erro do servidor
+        setSubmissionMessage('Erro ao submeter o formulário. Por favor, tente novamente mais tarde!');
+      } else if (error.request) {
+        console.error('Error request:', error.request);
+        setSubmissionMessage('Erro ao submeter o formulário. Por favor, verifique sua conexão e tente novamente.');
+      } else {
+        console.error('Error:', error.message);
+        setSubmissionMessage('Erro ao submeter o formulário. Por favor, tente novamente mais tarde.');
+      }
     }
   };
 
@@ -53,6 +82,7 @@ const FormCliente = () => {
     const parsedDate = parseISO(servico.data); // Parse da data ISO
     return format(parsedDate, "dd/MM/yyyy", { locale: ptBR }); // Formatação da data para o padrão brasileiro
   };
+
   return (
     <div className="form-container">
       <h2 className="form-heading">Cadastro de clientes</h2>
@@ -87,22 +117,23 @@ const FormCliente = () => {
             onChange={handleChange}
           />
         </div>
-     
+
         <div>
           <label htmlFor="servico_id" className="form-label">Tipo de Serviço:</label>
           <select
             id="servico_id"
             name="servico_id"
             value={formData.servico_id}
-            onChange={handleChange}
+            onChange={handleChangeServico}
           >
             <option value="">Selecione um serviço</option>
             {servicos.map(servico => (
-               <option key={servico._id} value={servico._id}>
-               {servico.nome} - {formatData(servico)} - {servico.horario}
-             </option>
+              <option key={servico._id} value={servico._id}>
+                {servico.nome} - {formatData(servico)} - {servico.horario}
+              </option>
             ))}
           </select>
+          {error && <p className="error-message">{error}</p>}
         </div>
         <button type="submit" className="form-submit">Enviar</button>
       </form>

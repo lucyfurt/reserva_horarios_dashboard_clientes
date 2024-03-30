@@ -1,5 +1,29 @@
 const Servico = require('../model/modelServico');
 
+
+exports.atualizarServico = async (req, res) => {
+  const servicoId = req.params.id;
+  const { disponivel } = req.body;
+
+  try {
+    const servico = await Servico.findByIdAndUpdate(
+      servicoId,
+      { disponivel },
+      { new: true }
+    );
+
+    if (!servico) {
+      return res.status(404).json({ message: 'Serviço não encontrado.' });
+    }
+
+    res.status(200).json({ message: 'Serviço atualizado com sucesso.', servico });
+  } catch (error) {
+    console.error('Erro ao atualizar serviço:', error);
+    res.status(500).json({ error: 'Erro ao atualizar serviço.' });
+  }
+};
+
+
 exports.createServicos = async (req, res) => {
   try {
     const { data, horario } = req.body;

@@ -29,10 +29,14 @@ router.post('/clientes', clienteController.createClientes);
 router.get('/clientes', clienteController.getClientes);
 router.delete('/clientes/:id', clienteController.deleteCliente);
 
+
 /* Rotas servicoController */
 router.post('/servicos', servicoController.createServicos);
 router.get('/servicos', servicoController.getServicos);
 router.delete('/servicos/:id', servicoController.deleteServicos);
+router.put('/servicos/:id', servicoController.atualizarServico);
+
+
 
 mongoose.connect(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true });
 app.listen(port, () => {
