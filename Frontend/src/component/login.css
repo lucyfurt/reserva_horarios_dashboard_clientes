@@ -1,0 +1,36 @@
+.logo {
+    position: absolute;
+    width: 250px;
+    height: 200px;    
+    top: 20%;
+}
+
+.container-logo {
+    background-color: #e4b68c;
+}
+
+.card-white {
+    width: 100%;
+}
+
+.token {
+    font-size: 12px;
+}
+
+.menu {
+  margin: 0;
+  padding: 10px;
+  background-color:#e4b68c;
+  color: azure;
+  text-align: right;
+  }
+   
+  .menu ul li {
+    display: inline;
+    margin-left: 20px;
+  }
+  
+  .menu ul li a {
+    text-decoration: none;
+    color: #333;
+  }
