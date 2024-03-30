@@ -2,6 +2,15 @@ const Servico = require('../model/modelServico');
 
 exports.createServicos = async (req, res) => {
   try {
+    const { data, horario } = req.body;
+
+    // Verificar se já existe um serviço agendado para a mesma data e horário
+    const servicoExistente = await Servico.findOne({ data, horario });
+    if (servicoExistente) {
+      return res.status(400).json({ error: 'Já existe um serviço agendado para este dia e horário' });
+    }
+
+    // Se não houver serviço agendado, criar e salvar o novo serviço
     const servico = new Servico(req.body);
     await servico.save();
     res.status(201).json(servico);
@@ -9,6 +18,7 @@ exports.createServicos = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 exports.getServicos = async (req, res) => {
   try {
