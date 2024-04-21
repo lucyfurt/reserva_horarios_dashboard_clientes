@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import Logo from '../temp/logo';
-
 import './home.css';
+import Carousel from './Carousel';
 
 class App extends Component {
     render() {
         return (
+            <>           
             <div className="container">
                 <div className="menu">
-                    <ul>
-                        <li><Logo className="logo" /></li>
-                        <li><a href="#">Home</a></li>
+                    <ul>                   
                         <li><a href="#">Serviços</a></li>
                         <li><a href="/login">Entrar</a></li>
                     </ul>
                 </div>
+                <Carousel/>
                 <div className="app-container">
                     <div className="body">
                         <h1 className="main-heading">Reservar serviços</h1>
@@ -26,6 +25,8 @@ class App extends Component {
                     </div>
                 </div>
             </div>
+            </>
+            
         );
     }
 }

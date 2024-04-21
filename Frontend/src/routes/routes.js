@@ -29,7 +29,7 @@ const RouteLogin = () => (
       <Route exact path="/login" component={Login} />
       <Route exact path="/cadastro" component={Cadastrar} />
       <Route exact path="/formCliente" component={FormCliente}/>   
-      <Route exact path="/formServico" component={FormServico}/>         
+      <Route exact path="/formServico" component={FormServico}/>
       <PrivateRoute exact path="/" component={Logado} />
     </Switch>
   </ BrowserRouter>
