@@ -1,63 +1,49 @@
 .container {
-  max-width: 1600px;
+  max-width: 1000px;
 }
 
 .menu {
-  background-color: #EDBEB6;
+  background-color: #fef5c6;
   padding: 30px;
-  border-radius: 5px;
 }
 
 .menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  
+
 }
 
-.menu li {
-  margin-right: 10px;
-}
+
 
 .menu li a {
   text-decoration: none;
-  color: #333;
+  color: #736558;
   font-weight: bold;
 }
 
-.app-container {
-  
-  
-}
 
-.body {
-
-}
 
 .main-heading {
-  font-size: 36px;
-  margin-bottom: 20px;
+  font-size: 26px;
+
 }
 
-.button-container {
-  margin-top: 20px;
-}
 
 .custom-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #aaf2e4;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
 }
 
 .custom-button:hover {
-  background-color: #0056b3;
+  background-color: #31d5de;
 }
 
 .logo {
-  width: 100px;
-  /* ajuste o tamanho conforme necessário */
+  width: 50px;
   height: auto;
 }
